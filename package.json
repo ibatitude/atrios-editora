@@ -9,8 +9,8 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "postbuild": "node scripts/flatten-rsc-payloads.mjs && node scripts/prepare-static-host.mjs",
-    "deploy": "npm run build && wrangler deploy",
-    "preview": "npm run build && wrangler dev"
+    "deploy": "npm run build && wrangler pages deploy",
+    "preview": "npm run build && wrangler pages dev"
   },
   "dependencies": {
     "next": "16.3.3",

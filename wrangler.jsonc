@@ -3,11 +3,10 @@
   "name": "atrios-editora",
   "compatibility_date": "2026-08-28",
 
-  // Worker sem script: só assets estáticos. Requisições a assets são
-  // gratuitas e ilimitadas — não consomem a cota de Workers da conta.
-  "assets": {
-    "directory": "./out",
-    // out/404.html é a página de erro do Next (app/not-found.tsx).
-    "not_found_handling": "404-page"
-  }
+  // Projeto do Cloudflare Pages: só assets estáticos, sem Pages Functions.
+  // Com este campo presente, o arquivo passa a ser a fonte de verdade da
+  // configuração — o painel mostra, mas não deixa editar.
+  // O out/404.html (gerado de app/not-found.tsx) o Pages serve sozinho
+  // em rota não encontrada, com status 404.
+  "pages_build_output_dir": "./out"
 }
