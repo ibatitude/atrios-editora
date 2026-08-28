@@ -16,7 +16,7 @@ export function siteUrl(): string {
  * campo, então declarar `images` só no layout deixaria estas rotas sem card.
  */
 export const DEFAULT_OG_IMAGE = {
-  url: '/og-default.png',
+  url: '/assets/og-default.png',
   width: 1200,
   height: 630,
   alt: SITE_NAME,

@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     title: `${SITE_NAME} | Livros que carregam propósito`,
     description: SITE_DESCRIPTION,
-    images: [{ url: '/og-default.png', width: 1200, height: 630, alt: SITE_NAME }],
+    images: [{ url: '/assets/og-default.png', width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: { card: 'summary_large_image' },
   // Endereços temporários (github.io de projeto) não devem ser indexados: o que

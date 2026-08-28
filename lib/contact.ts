@@ -5,6 +5,17 @@ export const EDITORIAL_EMAIL = 'contato@atrioseditora.com.br';
 export const ORDERS_EMAIL = 'pedidos@atrioseditora.com.br';
 export const EDITORIAL_PHONE = '(31) 3490-8200';
 
+/** Sede editorial. Consumido pelo rodapé e pela página de contato. */
+export const ADDRESS = {
+  street: 'Avenida das Américas',
+  city: 'Rio de Janeiro',
+  state: 'RJ',
+  country: 'Brasil',
+} as const;
+
+export const ADDRESS_LINE_1 = ADDRESS.street;
+export const ADDRESS_LINE_2 = `${ADDRESS.city}, ${ADDRESS.state} • ${ADDRESS.country}`;
+
 const PROFILE_LABELS: Record<ContactFormData['type'], string> = {
   leitor: 'Leitor',
   livraria: 'Livraria / Loja',

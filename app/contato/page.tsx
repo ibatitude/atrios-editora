@@ -4,7 +4,13 @@ import { DEFAULT_OG_IMAGE } from '@/lib/seo';
 import { ContactTabs } from '@/components/ContactTabs';
 import { ContactForm } from '@/components/ContactForm';
 import { ManuscriptForm } from '@/components/ManuscriptForm';
-import { EDITORIAL_EMAIL, EDITORIAL_PHONE, ORDERS_EMAIL } from '@/lib/contact';
+import {
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  EDITORIAL_EMAIL,
+  EDITORIAL_PHONE,
+  ORDERS_EMAIL,
+} from '@/lib/contact';
 import { CheckCircle2, Clock, Info, Mail, MapPin, Phone } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -138,9 +144,9 @@ function OfficialChannels() {
                 Sede Editorial &amp; Correspondência
               </h4>
               <p className="text-xs text-[#0F2C2C]/60 mt-0.5">
-                Av. das Nações Literárias, 1420 — Sala 804
+                {ADDRESS_LINE_1}
                 <br />
-                Belo Horizonte, MG • CEP 30120-050
+                {ADDRESS_LINE_2}
               </p>
             </div>
           </div>

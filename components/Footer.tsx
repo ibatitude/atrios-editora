@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Logo } from './Logo';
 import { NewsletterForm } from './NewsletterForm';
 import { BackToTop } from './BackToTop';
+import { ADDRESS_LINE_1, ADDRESS_LINE_2 } from '@/lib/contact';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 const linkClass =
@@ -125,7 +126,7 @@ export const Footer: React.FC = () => {
             <div className="space-y-2.5 text-xs opacity-75">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#D9D1C5] flex-shrink-0 mt-0.5" />
-                <span>Av. das Nações Literárias, 1420 — Sala 804<br />Belo Horizonte, MG • Brasil</span>
+                <span>{ADDRESS_LINE_1}<br />{ADDRESS_LINE_2}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#D9D1C5] flex-shrink-0" />
