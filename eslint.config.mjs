@@ -5,7 +5,7 @@ import typescript from 'eslint-config-next/typescript';
 // config nativo — por isso não há FlatCompat aqui. O binário do eslint lê este
 // arquivo direto (script "lint" do package.json).
 const config = [
-  { ignores: ['.next/**', 'out/**', 'node_modules/**', 'next-env.d.ts'] },
+  { ignores: ['.next/**', 'out/**', '.wrangler/**', 'node_modules/**', 'next-env.d.ts'] },
   ...coreWebVitals,
   ...typescript,
   {

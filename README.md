@@ -51,32 +51,28 @@ Copie `.env.example` para `.env.local`. Todas são opcionais e todas são de bui
 
 ## Deploy
 
-Publicado no **GitHub Pages** pelo workflow `.github/workflows/deploy-pages.yml`,
-que roda a cada push na `main`. Habilite uma vez em *Settings → Pages → Source:
-GitHub Actions*.
+Hospedado na **Cloudflare** como Worker de assets estáticos (`wrangler.jsonc`, sem script
+Worker). Requisições a assets são gratuitas e ilimitadas — não consomem a cota de Workers
+da conta, que é por conta e compartilhada com os outros projetos.
 
-URL atual: `https://ibatitude.github.io/atrios-editora` — uma *project page*, servida
-em subpasta. Por isso o build define `basePath` e `trailingSlash`, e por isso o
-`postbuild` grava `.nojekyll` (sem ele o Jekyll do Pages ignora `_next/` e o site vai
-ao ar sem CSS nem JS).
+```bash
+npm run preview   # build + wrangler dev, o runtime real da Cloudflare local
+npm run deploy    # build + wrangler deploy
+```
 
-**Este endereço está marcado como `noindex` de propósito.** É temporário: se o Google
-indexar `github.io/atrios-editora` agora, essas URLs viram lixo quando o domínio
-próprio entrar, e o GitHub Pages não oferece redirect 301 para consertar. Como o
-objetivo inteiro da migração é ranquear, o certo é só abrir para indexação no
-endereço definitivo.
+`not_found_handling: "404-page"` faz o `out/404.html` (gerado de `app/not-found.tsx`)
+responder com status 404 de verdade, não 200.
 
-### Migrar para domínio próprio ou Cloudflare
+**O build vai como `noindex` enquanto o endereço não for o definitivo.** URL indexada que
+depois muda vira link morto, e o objetivo inteiro da migração é ranquear. Ao publicar no
+domínio final, remova `NEXT_PUBLIC_NOINDEX`.
 
-Três variáveis de ambiente, nenhuma mudança de código:
+### Site privado
 
-| Variável | GitHub Pages (hoje) | Domínio próprio |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | `https://ibatitude.github.io/atrios-editora` | `https://atrioseditora.com.br` |
-| `NEXT_PUBLIC_BASE_PATH` | `/atrios-editora` | *(vazio)* |
-| `NEXT_PUBLIC_NOINDEX` | `1` | *(vazio)* |
-
-O `out/` gerado é o mesmo artefato nos dois casos.
+Repositório privado **não** deixa o site privado — são coisas distintas. Para restringir
+quem abre a página, o caminho é **Cloudflare Access** na frente do hostname, o que exige o
+domínio como zona na Cloudflare. Enquanto isso não existe, a revisão realmente privada é
+local (`npm run preview`), não uma URL pública obscura.
 
 ## Buscar dados de lojas externas
 

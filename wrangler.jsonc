@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "atrios-editora",
+  "compatibility_date": "2026-08-28",
+
+  // Worker sem script: só assets estáticos. Requisições a assets são
+  // gratuitas e ilimitadas — não consomem a cota de Workers da conta.
+  "assets": {
+    "directory": "./out",
+    // out/404.html é a página de erro do Next (app/not-found.tsx).
+    "not_found_handling": "404-page"
+  }
+}

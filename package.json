@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "postbuild": "node scripts/flatten-rsc-payloads.mjs && node scripts/prepare-static-host.mjs"
+    "postbuild": "node scripts/flatten-rsc-payloads.mjs && node scripts/prepare-static-host.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev"
   },
   "dependencies": {
     "next": "16.3.3",
@@ -24,6 +26,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4"
   }
 }
