@@ -51,37 +51,32 @@ Copie `.env.example` para `.env.local`. Todas são opcionais e todas são de bui
 
 ## Deploy
 
-Hospedado no **Cloudflare Pages**, com integração Git: push na `main` dispara build e
-deploy sozinho. Mesmo padrão do `the-system`.
+Hospedado na **Cloudflare** como Worker de assets estáticos, com **Workers Builds**: o
+repositório é conectado no painel e cada push na `main` dispara build e deploy sozinho —
+sem workflow no repositório e sem token da Cloudflare guardado no GitHub.
 
-Configuração no painel (*Workers & Pages → Create → Pages → Connect to Git*):
+Configuração no painel (*Compute → Workers & Pages → Create application → Connect GitHub*):
 
 | Campo | Valor |
 | --- | --- |
 | Build command | `npm run build` |
-| Build output directory | `out` |
-| Variáveis de build | `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_NOINDEX` |
+| Deploy command | `npx wrangler deploy` (padrão) |
+| Root directory | `/` |
+| Variáveis de **build** | `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_NOINDEX` |
 
 As variáveis precisam ser de **build**, não de runtime: elas são assadas no HTML estático
-durante o `next build` e não existem mais depois disso.
-
-O `wrangler.jsonc` tem `pages_build_output_dir`, o que torna o arquivo a fonte de verdade
-da configuração do projeto — o painel passa a exibir sem deixar editar.
+durante o `next build` e não existem mais depois disso. A própria doc da Cloudflare avisa
+que "build variables will not be accessible at runtime".
 
 Deploy manual, quando precisar:
 
 ```bash
-npm run preview   # build + wrangler pages dev, o runtime real da Cloudflare local
-npm run deploy    # build + wrangler pages deploy
+npm run preview   # build + wrangler dev, o runtime real da Cloudflare local
+npm run deploy    # build + wrangler deploy
 ```
 
-Branches que não são a de produção viram **preview deployments** com URL própria, e o
-Cloudflare comenta o link no pull request. É o caminho para mandar staging ao cliente sem
-publicar em produção.
-
-Limites do plano free, com folga: 500 builds/mês, 20.000 arquivos (usamos 162) e 25 MiB por
-arquivo (o maior tem 224 KB). Requisições a assets estáticos não consomem a cota de Workers
-da conta.
+Requisições a assets estáticos são gratuitas e ilimitadas — o site não disputa a cota de
+Workers da conta, que é de 100.000 requisições por dia e é compartilhada entre projetos.
 
 **O build vai como `noindex` enquanto o endereço não for o definitivo.** URL indexada que
 depois muda vira link morto, e o objetivo inteiro da migração é ranquear. Ao publicar no
@@ -89,10 +84,10 @@ domínio final, remova `NEXT_PUBLIC_NOINDEX`.
 
 ### Site privado
 
-Repositório privado **não** deixa o site privado — são coisas distintas. O Pages aceita
-repositório privado sem plano pago, mas a página publicada segue aberta. Para restringir
-quem abre, seria Cloudflare Access na frente do hostname, o que exige o domínio como zona
-na Cloudflare.
+Repositório privado **não** deixa o site privado — são coisas distintas. A Cloudflare aceita
+repositório privado sem plano pago, mas a página publicada segue aberta a quem tiver o link.
+Para restringir quem abre, seria Cloudflare Access na frente do hostname, o que exige o
+domínio como zona na Cloudflare.
 
 ## Buscar dados de lojas externas
 
