@@ -1,0 +1,8 @@
+{
+  "name": "Átrios Editora",
+  "description": "Livros que carregam propósito. Palavras que transformam vidas. Site institucional completo da Átrios Editora com catálogo, autores, história e submissão de originais.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
