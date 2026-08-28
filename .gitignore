@@ -1,0 +1,21 @@
+# dependências
+node_modules/
+
+# build Next.js
+.next/
+/out
+next-env.d.ts
+*.tsbuildinfo
+
+# deploy
+.wrangler/
+.vercel
+
+# diversos
+coverage/
+.DS_Store
+*.log
+
+# variáveis de ambiente
+.env*
+!.env.example
