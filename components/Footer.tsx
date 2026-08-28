@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Logo } from './Logo';
 import { NewsletterForm } from './NewsletterForm';
 import { BackToTop } from './BackToTop';
-import { ADDRESS_LINE_1, ADDRESS_LINE_2 } from '@/lib/contact';
+import { ADDRESS_LINE_1, ADDRESS_LINE_2, EDITORIAL_PHONE } from '@/lib/contact';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 const linkClass =
@@ -139,7 +139,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#D9D1C5] flex-shrink-0" />
-                <span>(31) 3490-8200 / WhatsApp</span>
+                <span>{EDITORIAL_PHONE} / WhatsApp</span>
               </div>
               <div className="pt-1">
                 <span className="inline-block px-2.5 py-1 bg-[#091b1b] text-[#D9D1C5] rounded-xs font-mono text-[11px] border border-white/10">

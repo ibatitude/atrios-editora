@@ -194,7 +194,7 @@ export const ManuscriptForm: React.FC = () => {
               required
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              placeholder="(31) 99999-0000"
+              placeholder="(21) 99999-0000"
               className={inputClass}
             />
           </div>
@@ -207,7 +207,7 @@ export const ManuscriptForm: React.FC = () => {
               required
               value={form.cityState}
               onChange={(e) => setForm({ ...form, cityState: e.target.value })}
-              placeholder="Ex: Belo Horizonte, MG"
+              placeholder="Ex: Rio de Janeiro, RJ"
               className={inputClass}
             />
           </div>

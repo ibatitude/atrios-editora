@@ -151,7 +151,7 @@ export const ContactForm: React.FC = () => {
             type="tel"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            placeholder="(31) 99999-0000"
+            placeholder="(21) 99999-0000"
             className={inputClass}
           />
         </div>

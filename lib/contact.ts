@@ -3,7 +3,7 @@ import type { ContactFormData, ManuscriptFormData } from '@/lib/types';
 /** Canais editoriais exibidos no site. */
 export const EDITORIAL_EMAIL = 'contato@atrioseditora.com.br';
 export const ORDERS_EMAIL = 'pedidos@atrioseditora.com.br';
-export const EDITORIAL_PHONE = '(31) 3490-8200';
+export const EDITORIAL_PHONE = '(21) 3490-8200';
 
 /** Sede editorial. Consumido pelo rodapé e pela página de contato. */
 export const ADDRESS = {
