@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { BookCard } from '@/components/BookCard';
 import { AUTHORS, BOOKS, STATS, TESTIMONIALS } from '@/lib/data';
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, siteUrl } from '@/lib/seo';
-import { ADDRESS, EDITORIAL_EMAIL } from '@/lib/contact';
+import { ADDRESS, COMPANY, EDITORIAL_EMAIL } from '@/lib/contact';
 import {
   ArrowRight,
   BookOpen,
@@ -46,11 +46,14 @@ export default function HomePage() {
       slogan: SITE_TAGLINE,
       description: SITE_DESCRIPTION,
       knowsLanguage: 'pt-BR',
+      legalName: COMPANY.legalName,
+      taxID: COMPANY.cnpj,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: ADDRESS.street,
+        streetAddress: `${ADDRESS.street} — ${ADDRESS.complement}`,
         addressLocality: ADDRESS.city,
         addressRegion: ADDRESS.state,
+        postalCode: ADDRESS.postalCode,
         addressCountry: 'BR',
       },
       email: EDITORIAL_EMAIL,

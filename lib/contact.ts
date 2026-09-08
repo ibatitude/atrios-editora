@@ -1,20 +1,33 @@
 import type { ContactFormData, ManuscriptFormData } from '@/lib/types';
 
-/** Canais editoriais exibidos no site. */
-export const EDITORIAL_EMAIL = 'contato@atrioseditora.com.br';
-export const ORDERS_EMAIL = 'pedidos@atrioseditora.com.br';
-export const EDITORIAL_PHONE = '(21) 3490-8200';
+/**
+ * Dados oficiais da editora. Fonte única: rodapé, página de contato e o
+ * JSON-LD da Organization saem todos daqui.
+ */
 
-/** Sede editorial. Consumido pelo rodapé e pela página de contato. */
+/** Único canal de contato hoje. A editora não tem telefone. */
+export const EDITORIAL_EMAIL = 'editoraatrios@gmail.com';
+
+/** Dados cadastrais. `legalName` é a razão social, distinta do nome fantasia. */
+export const COMPANY = {
+  legalName: 'Átrios Serviços Religiosos Ltda.',
+  cnpj: '26.769.164/0001-71',
+  inscricaoMunicipal: '1038039-1',
+  inscricaoEstadual: '112.216.927',
+} as const;
+
+/** Sede editorial. */
 export const ADDRESS = {
-  street: 'Avenida das Américas',
+  street: 'Rua Buenos Aires, 100',
+  complement: 'Pavimento 7',
   city: 'Rio de Janeiro',
   state: 'RJ',
+  postalCode: '20070-022',
   country: 'Brasil',
 } as const;
 
-export const ADDRESS_LINE_1 = ADDRESS.street;
-export const ADDRESS_LINE_2 = `${ADDRESS.city}, ${ADDRESS.state} • ${ADDRESS.country}`;
+export const ADDRESS_LINE_1 = `${ADDRESS.street} — ${ADDRESS.complement}`;
+export const ADDRESS_LINE_2 = `${ADDRESS.city}, ${ADDRESS.state} • CEP ${ADDRESS.postalCode}`;
 
 const PROFILE_LABELS: Record<ContactFormData['type'], string> = {
   leitor: 'Leitor',

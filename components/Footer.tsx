@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Logo } from './Logo';
 import { NewsletterForm } from './NewsletterForm';
 import { BackToTop } from './BackToTop';
-import { ADDRESS_LINE_1, ADDRESS_LINE_2, EDITORIAL_PHONE } from '@/lib/contact';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { ADDRESS_LINE_1, ADDRESS_LINE_2, COMPANY, EDITORIAL_EMAIL } from '@/lib/contact';
+import { Mail, MapPin } from 'lucide-react';
 
 const linkClass =
   'opacity-70 hover:opacity-100 hover:text-white transition-colors text-left';
@@ -131,20 +131,11 @@ export const Footer: React.FC = () => {
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#D9D1C5] flex-shrink-0" />
                 <a
-                  href="mailto:contato@atrioseditora.com.br"
+                  href={`mailto:${EDITORIAL_EMAIL}`}
                   className="hover:underline min-w-0 break-all"
                 >
-                  contato@atrioseditora.com.br
+                  {EDITORIAL_EMAIL}
                 </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#D9D1C5] flex-shrink-0" />
-                <span>{EDITORIAL_PHONE} / WhatsApp</span>
-              </div>
-              <div className="pt-1">
-                <span className="inline-block px-2.5 py-1 bg-[#091b1b] text-[#D9D1C5] rounded-xs font-mono text-[11px] border border-white/10">
-                  Seg à Sex: 09h às 18h
-                </span>
               </div>
             </div>
           </div>
@@ -153,7 +144,9 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar: Copyright & Back to Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-60">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
-            <span>© {new Date().getFullYear()} Átrios Editora Ltda. CNPJ: 42.180.990/0001-35.</span>
+            <span>
+              © {new Date().getFullYear()} {COMPANY.legalName} · CNPJ {COMPANY.cnpj}
+            </span>
             <span className="hidden sm:inline">•</span>
             <span>Todos os direitos reservados.</span>
           </div>

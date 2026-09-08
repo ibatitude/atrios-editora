@@ -4,14 +4,8 @@ import { DEFAULT_OG_IMAGE } from '@/lib/seo';
 import { ContactTabs } from '@/components/ContactTabs';
 import { ContactForm } from '@/components/ContactForm';
 import { ManuscriptForm } from '@/components/ManuscriptForm';
-import {
-  ADDRESS_LINE_1,
-  ADDRESS_LINE_2,
-  EDITORIAL_EMAIL,
-  EDITORIAL_PHONE,
-  ORDERS_EMAIL,
-} from '@/lib/contact';
-import { CheckCircle2, Clock, Info, Mail, MapPin, Phone } from 'lucide-react';
+import { ADDRESS_LINE_1, ADDRESS_LINE_2, EDITORIAL_EMAIL } from '@/lib/contact';
+import { CheckCircle2, Info, Mail, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contato & Originais',
@@ -158,39 +152,13 @@ function OfficialChannels() {
             <div>
               <h4 className="font-bold text-xs text-[#0F2C2C]">Atendimento Editorial</h4>
               <p className="text-xs text-[#0F2C2C]/60 mt-0.5">
-                <a href={`mailto:${EDITORIAL_EMAIL}`} className="hover:text-[#0F2C2C] hover:underline">
+                <a href={`mailto:${EDITORIAL_EMAIL}`} className="hover:text-[#0F2C2C] hover:underline break-all">
                   {EDITORIAL_EMAIL}
                 </a>
               </p>
-              <p className="text-xs text-[#0F2C2C]/60">
-                <a href={`mailto:${ORDERS_EMAIL}`} className="hover:text-[#0F2C2C] hover:underline">
-                  {ORDERS_EMAIL}
-                </a>
-              </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <div className="w-9 h-9 rounded-sm bg-[#F5F1EB] flex items-center justify-center text-[#0F2C2C] flex-shrink-0 mt-0.5">
-              <Phone className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-xs text-[#0F2C2C]">Telefone &amp; WhatsApp</h4>
-              <p className="text-xs text-[#0F2C2C]/60 mt-0.5">{EDITORIAL_PHONE}</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="w-9 h-9 rounded-sm bg-[#F5F1EB] flex items-center justify-center text-[#0F2C2C] flex-shrink-0 mt-0.5">
-              <Clock className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-xs text-[#0F2C2C]">Horário de Atendimento</h4>
-              <p className="text-xs text-[#0F2C2C]/60 mt-0.5">
-                Segunda a Sexta: 09h às 18h (Horário de Brasília)
-              </p>
-            </div>
-          </div>
         </div>
 
         <div className="pt-2 border-t border-[#0F2C2C15]">
