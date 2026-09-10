@@ -43,7 +43,7 @@ Copie `.env.example` para `.env.local`. Todas são opcionais e todas são de bui
 
 - `NEXT_PUBLIC_SITE_URL` — URL canônica pública, sem barra final. Alimenta
   `<link rel="canonical">`, as URLs absolutas de Open Graph e o `sitemap.xml`. Sem ela o
-  build cai no fallback `https://atrioseditora.com.br`.
+  build cai no fallback `https://editoraatrios.com.br`.
 - `NEXT_PUBLIC_BASE_PATH` — subpasta em que o site é servido, com barra inicial e sem
   barra final. Só necessária em GitHub Pages de projeto. Vazia para servir na raiz.
 - `NEXT_PUBLIC_NOINDEX` — qualquer valor marca o build inteiro como `noindex, nofollow`.

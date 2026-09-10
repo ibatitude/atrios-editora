@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
   'Na Átrios, acreditamos que um livro pode ir muito além de páginas. Publicamos livros que unem conteúdo, propósito e relevância.'
 
 export function siteUrl(): string {
-  const url = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://atrioseditora.com.br'
+  const url = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://editoraatrios.com.br'
   return url.replace(/\/$/, '')
 }
 
