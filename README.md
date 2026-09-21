@@ -55,6 +55,11 @@ Hospedado na **Cloudflare** como Worker de assets estáticos, com **Workers Buil
 repositório é conectado no painel e cada push na `main` dispara build e deploy sozinho —
 sem workflow no repositório e sem token da Cloudflare guardado no GitHub.
 
+Domínio: **editoraatrios.com.br**, registrado no Registro.br com o DNS delegado para a
+Cloudflare (`anna.ns.cloudflare.com` / `huxley.ns.cloudflare.com`). O hostname está
+vinculado ao Worker como *custom domain*, então os registros A e o certificado SSL são
+gerenciados pela Cloudflare — não há nada de DNS para manter à mão.
+
 Configuração no painel (*Compute → Workers & Pages → Create application → Connect GitHub*):
 
 | Campo | Valor |
