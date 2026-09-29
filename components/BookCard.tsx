@@ -24,6 +24,19 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
     >
       {/* Cover and badges */}
       <div className="relative bg-[#F5F1EB] p-6 flex items-center justify-center overflow-hidden min-h-[280px]">
+        {book.mockupImage && (
+          <>
+            <img
+              src={book.mockupImage}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover scale-110 blur-[2px]"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-[#0F2C2C]/35" aria-hidden="true" />
+          </>
+        )}
+
         {/* Category & Status badges */}
         <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20 pointer-events-none">
           <span
@@ -59,18 +72,6 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
               className="w-full h-full object-cover"
               loading="lazy"
             />
-            {/* Overlay title text on cover simulation */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-3 text-white">
-              <span className="text-[9px] uppercase font-sans tracking-[0.2em] text-[#D9D1C5] font-semibold">
-                ÁTRIOS
-              </span>
-              <h4 className="font-serif font-bold text-xs sm:text-sm leading-tight text-white drop-shadow-md line-clamp-2">
-                {book.title}
-              </h4>
-              <p className="text-[10px] text-white/80 font-sans mt-0.5 truncate">
-                {book.author}
-              </p>
-            </div>
           </div>
         </Link>
 

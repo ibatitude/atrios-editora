@@ -172,15 +172,6 @@ export default function HomePage() {
                         alt={heroBook.title}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-3 text-white">
-                        <span className="text-[9px] uppercase font-sans tracking-[0.2em] text-[#D9D1C5] font-semibold">
-                          ÁTRIOS
-                        </span>
-                        <h4 className="font-serif font-bold text-sm leading-tight text-white">
-                          {heroBook.title}
-                        </h4>
-                        <p className="text-[10px] text-white/80 font-sans">{heroBook.author}</p>
-                      </div>
                     </div>
 
                     <h3 className="font-serif font-bold text-lg text-[#0F2C2C] text-center mt-3 group-hover:opacity-80">

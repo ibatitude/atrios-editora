@@ -8,6 +8,8 @@ export interface Book {
   authorId: string;
   category: BookCategory;
   coverImage: string;
+  /** Foto de divulgação do livro, usada como fundo decorativo atrás da capa. */
+  mockupImage?: string;
   /** Página do produto na loja Nuvemshop, para onde o botão de compra leva. */
   storeUrl: string;
   price: number;

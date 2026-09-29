@@ -107,13 +107,6 @@ export default async function BookPage({ params }: PageProps) {
                 alt={`Capa do livro ${book.title}`}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F2C2C]/90 via-[#0F2C2C]/30 to-transparent flex flex-col justify-end p-3 text-white">
-                <span className="text-[10px] uppercase font-sans tracking-widest text-[#D9D1C5] font-bold">
-                  ÁTRIOS
-                </span>
-                <h2 className="font-serif font-bold text-sm leading-tight text-white">{book.title}</h2>
-                <p className="text-[10px] text-[#E8E2D9]">{book.author}</p>
-              </div>
             </div>
 
             <div className="mt-3 text-center">
