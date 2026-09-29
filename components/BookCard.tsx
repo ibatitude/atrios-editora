@@ -9,10 +9,10 @@ interface BookCardProps {
 
 export const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const categoryColors: Record<string, string> = {
-    'Fé': 'bg-[#0F2C2C]/10 text-[#0F2C2C] border-[#0F2C2C]/20',
-    'Liderança': 'bg-[#D9D1C5]/40 text-[#0F2C2C] border-[#D9D1C5]',
-    'Família': 'bg-[#E8E2D9] text-[#0F2C2C] border-[#D9D1C5]',
-    'Desenvolvimento Pessoal': 'bg-[#F5F1EB] text-[#0F2C2C] border-[#E8E2D9]'
+    'Fé': 'bg-[#E8E2D9] text-[#0F2C2C] border-[#D9D1C5]',
+    'Liderança': 'bg-[#D9D1C5] text-[#0F2C2C] border-[#C9BFB0]',
+    'Família': 'bg-[#F5F1EB] text-[#0F2C2C] border-[#D9D1C5]',
+    'Desenvolvimento Pessoal': 'bg-[#FDFBF7] text-[#0F2C2C] border-[#E8E2D9]'
   };
 
   const href = `/livros/${book.id}`;
