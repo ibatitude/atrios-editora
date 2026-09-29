@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Book } from '@/lib/types';
-import { Star, ShoppingBag, ArrowRight } from 'lucide-react';
+import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 interface BookCardProps {
   book: Book;
@@ -81,16 +81,9 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
       {/* Book details & info */}
       <div className="p-5 flex-grow flex flex-col justify-between bg-white">
         <div>
-          <div className="flex items-center gap-1.5 mb-1.5 text-xs text-[#0F2C2C]/60">
-            <div className="flex items-center text-[#0F2C2C]">
-              <Star className="w-3.5 h-3.5 fill-[#0F2C2C] text-[#0F2C2C]" />
-              <span className="ml-1 font-bold text-[#0F2C2C] text-xs">{book.rating.toFixed(1)}</span>
-            </div>
-            <span>•</span>
-            <span>{book.reviewCount} avaliações</span>
-            <span>•</span>
-            <span>{book.pages} págs</span>
-          </div>
+          {book.pages && (
+            <p className="mb-1.5 text-xs text-[#0F2C2C]/60">{book.pages} págs</p>
+          )}
 
           <h3 className="font-serif font-bold text-lg text-[#0F2C2C] leading-snug line-clamp-1">
             <Link href={href} className="hover:opacity-75 transition-opacity">
@@ -126,7 +119,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
                 </span>
               )}
             </div>
-            <span className="text-[10px] text-[#0F2C2C]/70 font-medium block">Em até 3x sem juros</span>
+            <span className="text-[10px] text-[#0F2C2C]/70 font-medium block">Em até 12x no cartão</span>
           </div>
 
           <div className="flex items-center gap-1.5">
@@ -140,15 +133,17 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
               <ArrowRight className="w-3 h-3" />
             </Link>
 
-            <Link
-              href={href}
+            <a
+              href={book.storeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               id={`book-buy-btn-${book.id}`}
               className="p-2 text-white bg-[#0F2C2C] hover:bg-[#1a4040] rounded-sm transition-colors"
               title="Adquirir exemplar"
               aria-label={`Adquirir ${book.title}`}
             >
               <ShoppingBag className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>

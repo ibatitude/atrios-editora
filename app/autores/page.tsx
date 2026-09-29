@@ -127,10 +127,12 @@ export default function AutoresPage() {
                     <p className="text-xs font-bold text-[#0F2C2C] uppercase tracking-wider">
                       {author.role}
                     </p>
-                    <p className="text-xs text-[#0F2C2C]/60 flex items-center justify-center sm:justify-start gap-1">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>{author.location}</span>
-                    </p>
+                    {author.location && (
+                      <p className="text-xs text-[#0F2C2C]/60 flex items-center justify-center sm:justify-start gap-1">
+                        <MapPin className="w-3.5 h-3.5" />
+                        <span>{author.location}</span>
+                      </p>
+                    )}
 
                     <div className="flex flex-wrap gap-1.5 pt-2 justify-center sm:justify-start">
                       {author.specialties.map((spec, i) => (

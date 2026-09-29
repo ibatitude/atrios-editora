@@ -2,10 +2,9 @@
 
 import React, { useState } from 'react';
 import { Book } from '@/lib/types';
-import { Check, ShoppingBag, Truck, Share2 } from 'lucide-react';
+import { ShoppingBag, CreditCard, Share2 } from 'lucide-react';
 
 export const BookPurchase: React.FC<{ book: Book }> = ({ book }) => {
-  const [purchased, setPurchased] = useState(false);
   const [shareFeedback, setShareFeedback] = useState<string | null>(null);
 
   const handleShare = async () => {
@@ -33,7 +32,7 @@ export const BookPurchase: React.FC<{ book: Book }> = ({ book }) => {
             )}
           </div>
           <span className="text-xs text-[#0F2C2C] font-semibold flex items-center gap-1 mt-0.5">
-            <Truck className="w-3.5 h-3.5" /> Frete com desconto especial para todo o Brasil
+            <CreditCard className="w-3.5 h-3.5" /> Em até 12x no cartão pela loja oficial
           </span>
         </div>
 
@@ -46,14 +45,16 @@ export const BookPurchase: React.FC<{ book: Book }> = ({ book }) => {
           >
             <Share2 className="w-4 h-4" />
           </button>
-          <button
-            onClick={() => setPurchased(true)}
+          <a
+            href={book.storeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             id="direct-buy-btn"
             className="px-5 py-2.5 bg-[#0F2C2C] hover:opacity-90 text-[#FDFBF7] font-bold text-xs uppercase tracking-wider rounded-sm shadow-xs transition-all flex items-center gap-2 cursor-pointer"
           >
             <ShoppingBag className="w-4 h-4 text-[#D9D1C5]" />
             <span>Adquirir Exemplar</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -61,13 +62,6 @@ export const BookPurchase: React.FC<{ book: Book }> = ({ book }) => {
         <p role="status" className="text-xs text-[#0F2C2C]/70 font-medium">
           {shareFeedback}
         </p>
-      )}
-
-      {purchased && (
-        <div className="p-3 bg-[#E8E2D9] border border-[#0F2C2C15] text-[#0F2C2C] rounded-sm text-xs flex items-center gap-2 font-medium">
-          <Check className="w-4 h-4 flex-shrink-0" />
-          <span>Pedido simulado com sucesso! Redirecionando para plataforma de distribuição oficial da Átrios.</span>
-        </div>
       )}
     </div>
   );

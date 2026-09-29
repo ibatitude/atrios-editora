@@ -6,7 +6,7 @@ import { BOOKS, getAuthor, getBook } from '@/lib/data';
 import { SITE_NAME, siteUrl } from '@/lib/seo';
 import { BookTabs } from '@/components/BookTabs';
 import { BookPurchase } from '@/components/BookPurchase';
-import { Star, ShieldCheck, ChevronRight } from 'lucide-react';
+import { ShieldCheck, ChevronRight } from 'lucide-react';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -64,24 +64,20 @@ export default async function BookPage({ params }: PageProps) {
     ...(book.subtitle ? { alternateName: book.subtitle } : {}),
     author: { '@type': 'Person', name: book.author },
     publisher: { '@type': 'Organization', name: SITE_NAME },
-    isbn: book.isbn,
-    numberOfPages: book.pages,
+    ...(book.isbn ? { isbn: book.isbn } : {}),
+    ...(book.pages ? { numberOfPages: book.pages } : {}),
     inLanguage: 'pt-BR',
-    datePublished: String(book.publishedYear),
-    bookFormat: 'https://schema.org/Paperback',
+    ...(book.publishedYear ? { datePublished: String(book.publishedYear) } : {}),
+    ...(book.format ? { bookFormat: book.format === 'Capa Dura' ? 'https://schema.org/Hardcover' : 'https://schema.org/Paperback' } : {}),
     description: book.longDescription,
-    image: book.coverImage,
+    image: `${siteUrl()}${book.coverImage}`,
     url: `${siteUrl()}/livros/${book.id}`,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: book.rating,
-      reviewCount: book.reviewCount,
-    },
     offers: {
       '@type': 'Offer',
       price: book.price.toFixed(2),
       priceCurrency: 'BRL',
       availability: 'https://schema.org/InStock',
+      url: book.storeUrl,
     },
   };
 
@@ -121,11 +117,13 @@ export default async function BookPage({ params }: PageProps) {
             </div>
 
             <div className="mt-3 text-center">
-              <span className="text-[11px] text-[#0F2C2C]/70 font-medium block">
-                Formato: {book.format}
-              </span>
+              {book.format && (
+                <span className="text-[11px] text-[#0F2C2C]/70 font-medium block">
+                  Formato: {book.format}
+                </span>
+              )}
               <span className="text-[11px] text-[#0F2C2C]/70">
-                {book.pages} páginas • {book.dimensions}
+                {[book.pages && `${book.pages} páginas`, book.dimensions].filter(Boolean).join(' • ')}
               </span>
             </div>
           </div>
@@ -136,19 +134,7 @@ export default async function BookPage({ params }: PageProps) {
               <span className="text-xs uppercase tracking-widest font-bold px-2.5 py-0.5 rounded-sm bg-[#0F2C2C] text-[#FDFBF7]">
                 {book.category}
               </span>
-              <span className="text-xs text-[#0F2C2C]/60">ISBN {book.isbn}</span>
-            </div>
-
-            <div className="flex items-center gap-1 text-sm text-[#0F2C2C]">
-              <div className="flex" aria-hidden="true">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current text-[#0F2C2C]" />
-                ))}
-              </div>
-              <span className="font-bold text-[#0F2C2C] ml-1">{book.rating.toFixed(1)}</span>
-              <span className="text-xs text-[#0F2C2C]/60">
-                ({book.reviewCount} avaliações editoriais e de leitores)
-              </span>
+              {book.isbn && <span className="text-xs text-[#0F2C2C]/60">ISBN {book.isbn}</span>}
             </div>
 
             <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F2C2C] leading-tight">

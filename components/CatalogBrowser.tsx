@@ -6,21 +6,20 @@ import { BOOKS, CATEGORIES, CATEGORY_LABELS, isBookCategory } from '@/lib/data';
 import { BookGrid } from './BookGrid';
 import { Search } from 'lucide-react';
 
-type SortBy = 'relevance' | 'price-asc' | 'price-desc' | 'rating' | 'title';
+type SortBy = 'relevance' | 'price-asc' | 'price-desc' | 'title';
 
 export const CatalogBrowser: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   // A categoria vive na URL (?categoria=), então o filtro é compartilhável e
-  // sobrevive ao botão voltar. Busca, formato e ordenação são efêmeros.
+  // sobrevive ao botão voltar. Busca e ordenação são efêmeras.
   // Valor fora da lista conhecida é tratado como "todos", não como filtro vazio.
   const rawCategory = searchParams.get('categoria') ?? '';
   const selectedCategory = isBookCategory(rawCategory) ? rawCategory : 'all';
 
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<SortBy>('relevance');
-  const [selectedFormat, setSelectedFormat] = useState('all');
 
   const selectCategory = (value: string) => {
     const url = value === 'all' ? '/catalogo' : `/catalogo?categoria=${encodeURIComponent(value)}`;
@@ -29,14 +28,12 @@ export const CatalogBrowser: React.FC = () => {
 
   const clearFilters = () => {
     setSearchQuery('');
-    setSelectedFormat('all');
     selectCategory('all');
   };
 
   const filteredBooks = useMemo(() => {
     return BOOKS.filter((book) => {
       if (selectedCategory !== 'all' && book.category !== selectedCategory) return false;
-      if (selectedFormat !== 'all' && book.format !== selectedFormat) return false;
 
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
@@ -51,14 +48,13 @@ export const CatalogBrowser: React.FC = () => {
     }).sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price;
       if (sortBy === 'price-desc') return b.price - a.price;
-      if (sortBy === 'rating') return b.rating - a.rating;
       if (sortBy === 'title') return a.title.localeCompare(b.title);
       return (b.bestseller ? 1 : 0) - (a.bestseller ? 1 : 0);
     });
-  }, [selectedCategory, selectedFormat, searchQuery, sortBy]);
+  }, [selectedCategory, searchQuery, sortBy]);
 
   const hasActiveFilters =
-    selectedCategory !== 'all' || searchQuery !== '' || selectedFormat !== 'all';
+    selectedCategory !== 'all' || searchQuery !== '';
 
   return (
     <>
@@ -87,7 +83,7 @@ export const CatalogBrowser: React.FC = () => {
 
         {/* Secondary Filter & Search Row */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-white p-4 rounded-sm border border-[#0F2C2C15] shadow-xs">
-          <div className="md:col-span-6 relative">
+          <div className="md:col-span-9 relative">
             <Search className="w-4 h-4 text-[#0F2C2C]/50 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
@@ -102,21 +98,6 @@ export const CatalogBrowser: React.FC = () => {
 
           <div className="md:col-span-3">
             <select
-              id="catalog-format-select"
-              value={selectedFormat}
-              onChange={(e) => setSelectedFormat(e.target.value)}
-              aria-label="Filtrar por formato"
-              className="w-full py-2.5 px-3 bg-[#FDFBF7] border border-[#0F2C2C20] rounded-sm text-xs font-medium text-[#0F2C2C] focus:outline-none focus:border-[#0F2C2C]"
-            >
-              <option value="all">Todos os Formatos</option>
-              <option value="Brochura com Orelhas">Brochura com Orelhas</option>
-              <option value="Capa Dura">Capa Dura</option>
-              <option value="Edição Especial">Edição Especial</option>
-            </select>
-          </div>
-
-          <div className="md:col-span-3">
-            <select
               id="catalog-sort-select"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortBy)}
@@ -126,7 +107,6 @@ export const CatalogBrowser: React.FC = () => {
               <option value="relevance">Ordenar: Destaques &amp; Relevância</option>
               <option value="price-asc">Preço: Menor para Maior</option>
               <option value="price-desc">Preço: Maior para Menor</option>
-              <option value="rating">Melhor Avaliados</option>
               <option value="title">Título: A - Z</option>
             </select>
           </div>

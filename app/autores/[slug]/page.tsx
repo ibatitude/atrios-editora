@@ -98,9 +98,13 @@ export default async function AuthorPage({ params }: PageProps) {
               {author.role}
             </p>
             <p className="text-xs text-[#0F2C2C]/60 flex items-center justify-center sm:justify-start gap-1">
-              <MapPin className="w-3.5 h-3.5" />
-              <span>{author.location}</span>
-              <span>•</span>
+              {author.location && (
+                <>
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>{author.location}</span>
+                  <span>•</span>
+                </>
+              )}
               <span>
                 {author.booksCount} {author.booksCount > 1 ? 'obras publicadas' : 'obra publicada'}
               </span>

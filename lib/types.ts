@@ -8,21 +8,22 @@ export interface Book {
   authorId: string;
   category: BookCategory;
   coverImage: string;
+  /** Página do produto na loja Nuvemshop, para onde o botão de compra leva. */
+  storeUrl: string;
   price: number;
   originalPrice?: number;
   synopsis: string;
   longDescription: string;
   sampleQuote: string;
-  pages: number;
-  isbn: string;
-  publishedYear: number;
-  dimensions: string;
-  format: 'Brochura com Orelhas' | 'Capa Dura' | 'Edição Especial';
+  // Dados de ficha técnica ainda não informados pela editora ficam ausentes e não aparecem na tela.
+  pages?: number;
+  isbn?: string;
+  publishedYear?: number;
+  dimensions?: string;
+  format?: 'Brochura com Orelhas' | 'Capa Dura' | 'Edição Especial';
   featured?: boolean;
   bestseller?: boolean;
   newRelease?: boolean;
-  rating: number;
-  reviewCount: number;
   sampleChapterTitle?: string;
   sampleChapterText?: string;
 }
@@ -35,7 +36,7 @@ export interface Author {
   bio: string;
   shortBio: string;
   quote: string;
-  location: string;
+  location?: string;
   booksCount: number;
   specialties: string[];
   bookIds: string[];
@@ -46,17 +47,6 @@ export interface EditorialValue {
   icon: string;
   title: string;
   description: string;
-}
-
-export interface ReaderTestimonial {
-  id: string;
-  name: string;
-  role: string;
-  city: string;
-  avatar: string;
-  bookTitle: string;
-  comment: string;
-  rating: number;
 }
 
 export interface ContactFormData {

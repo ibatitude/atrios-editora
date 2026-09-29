@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BookCard } from '@/components/BookCard';
-import { AUTHORS, BOOKS, STATS, TESTIMONIALS } from '@/lib/data';
+import { AUTHORS, BOOKS } from '@/lib/data';
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, siteUrl } from '@/lib/seo';
 import { ADDRESS, COMPANY, EDITORIAL_EMAIL } from '@/lib/contact';
 import {
@@ -11,7 +11,6 @@ import {
   ShieldCheck,
   Feather,
   HeartHandshake,
-  Star,
   Send
 } from 'lucide-react';
 
@@ -31,6 +30,7 @@ export default function HomePage() {
   const books = BOOKS;
   const authors = AUTHORS;
   const featuredBooks = books.filter((b) => b.featured).slice(0, 4);
+  const heroBook = books[0];
 
   const base = siteUrl();
 
@@ -160,20 +160,16 @@ export default function HomePage() {
                     <span className="px-2.5 py-0.5 bg-[#D9D1C5] text-[#0F2C2C] font-bold rounded-sm text-[10px] uppercase tracking-wider">
                       Lançamento em Destaque
                     </span>
-                    <div className="flex items-center text-[#0F2C2C]">
-                      <Star className="w-3.5 h-3.5 fill-[#0F2C2C] text-[#0F2C2C]" />
-                      <span className="ml-1 font-bold text-[#0F2C2C]">5.0</span>
-                    </div>
                   </div>
 
                   <Link
-                    href={`/livros/${books[1].id}`}
+                    href={`/livros/${heroBook.id}`}
                     className="group flex flex-col items-center"
                   >
                     <div className="w-[180px] h-[250px] rounded-r-sm rounded-l-xs overflow-hidden relative shadow-md book-shadow book-spine-effect my-2 transition-transform duration-300 group-hover:scale-105">
                       <img
-                        src={books[1].coverImage}
-                        alt={books[1].title}
+                        src={heroBook.coverImage}
+                        alt={heroBook.title}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-3 text-white">
@@ -181,31 +177,31 @@ export default function HomePage() {
                           ÁTRIOS
                         </span>
                         <h4 className="font-serif font-bold text-sm leading-tight text-white">
-                          {books[1].title}
+                          {heroBook.title}
                         </h4>
-                        <p className="text-[10px] text-white/80 font-sans">{books[1].author}</p>
+                        <p className="text-[10px] text-white/80 font-sans">{heroBook.author}</p>
                       </div>
                     </div>
 
                     <h3 className="font-serif font-bold text-lg text-[#0F2C2C] text-center mt-3 group-hover:opacity-80">
-                      {books[1].title}
+                      {heroBook.title}
                     </h3>
                     <p className="text-xs text-[#0F2C2C]/60 text-center italic mt-0.5">
-                      {books[1].subtitle}
+                      {heroBook.subtitle}
                     </p>
                     <p className="text-xs text-[#2D2D2D]/80 text-center mt-2 line-clamp-2">
-                      {books[1].synopsis}
+                      {heroBook.synopsis}
                     </p>
                   </Link>
 
                   <div className="mt-4 pt-3 border-t border-[#0F2C2C15] flex items-center justify-between">
                     <div>
                       <span className="font-serif font-bold text-lg text-[#0F2C2C]">
-                        R$ {books[1].price.toFixed(2).replace('.', ',')}
+                        R$ {heroBook.price.toFixed(2).replace('.', ',')}
                       </span>
                     </div>
                     <Link
-                      href={`/livros/${books[1].id}`}
+                      href={`/livros/${heroBook.id}`}
                       className="px-3.5 py-1.5 bg-[#0F2C2C] text-white text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-[#1a4040] transition-colors"
                     >
                       Ver Detalhes
@@ -214,9 +210,9 @@ export default function HomePage() {
                 </div>
 
                 {/* Floating quote badge */}
-                <div className="absolute -bottom-6 -left-6 bg-[#FDFBF7] border border-[#0F2C2C15] p-3 rounded-sm shadow-md max-w-[220px] hidden sm:block">
+                <div className="absolute top-full -mt-3 -left-6 bg-[#FDFBF7] border border-[#0F2C2C15] p-3 rounded-sm shadow-md max-w-[220px] hidden sm:block">
                   <p className="text-[11px] font-serif italic text-[#0F2C2C]">
-                    “Uma obra que redefine a autoridade através da humildade.”
+                    “{heroBook.sampleQuote}”
                   </p>
                 </div>
               </div>
@@ -265,10 +261,9 @@ export default function HomePage() {
 
       {/* 3. INSTITUTIONAL PURPOSE & NUMBERS */}
       <section id="purpose-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+        <div className="max-w-3xl">
           {/* Purpose narrative */}
-          <div className="lg:col-span-6 space-y-5">
+          <div className="space-y-5">
             <span className="text-xs uppercase tracking-widest font-bold text-[#0F2C2C]/70 block">
               Nosso Propósito
             </span>
@@ -295,25 +290,6 @@ export default function HomePage() {
                 <span>Conheça a história e os valores da Átrios</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
-            </div>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="lg:col-span-6">
-            <div className="grid grid-cols-2 gap-4 sm:gap-6">
-              {STATS.map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white p-4 sm:p-6 rounded-sm border border-[#0F2C2C15] shadow-xs hover:border-[#0F2C2C]/30 transition-all text-center sm:text-left"
-                >
-                  <span className="font-serif font-bold text-2xl sm:text-4xl text-[#0F2C2C] block">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs sm:text-sm font-medium text-[#0F2C2C]/60 mt-1 block">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
 
@@ -362,7 +338,7 @@ export default function HomePage() {
         </div>
 
         {/* Books Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {featuredBooks.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
@@ -387,7 +363,7 @@ export default function HomePage() {
           </div>
 
           {/* Authors Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 max-w-sm mx-auto">
             {authors.map((author) => (
               <Link
                 key={author.id}
@@ -438,57 +414,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-        </div>
-      </section>
-
-
-      {/* 6. READERS TESTIMONIALS */}
-      <section id="testimonials-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs uppercase tracking-widest font-bold text-[#0F2C2C]/70">
-            Vozes de Quem Leu
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F2C2C]">
-            Histórias de Transformação
-          </h2>
-          <p className="text-sm text-[#2D2D2D]/70">
-            O testemunho de leitores que encontraram nas obras da Átrios direção, fortalecimento e clareza.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t) => (
-            <div
-              key={t.id}
-              className="bg-white p-6 rounded-sm border border-[#0F2C2C15] shadow-xs flex flex-col justify-between space-y-4"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center text-[#0F2C2C]">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-[#0F2C2C] text-[#0F2C2C]" />
-                  ))}
-                </div>
-                <p className="font-serif italic text-sm text-[#2D2D2D]/85 leading-relaxed">
-                  {t.comment}
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-[#0F2C2C15] flex items-center gap-3">
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="w-10 h-10 rounded-full object-cover border border-[#D9D1C5]"
-                />
-                <div>
-                  <h4 className="font-serif font-bold text-sm text-[#0F2C2C]">{t.name}</h4>
-                  <p className="text-[11px] text-[#0F2C2C]/60">{t.role} • {t.city}</p>
-                  <span className="text-[10px] font-semibold text-[#0F2C2C]/80 block mt-0.5">
-                    Leitor de <em>{t.bookTitle}</em>
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 

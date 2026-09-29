@@ -19,7 +19,10 @@ const TABS: { id: TabId; label: string }[] = [
 export const BookTabs: React.FC<{ book: Book }> = ({ book }) => {
   const [activeTab, setActiveTab] = useState<TabId>('sinopse');
 
-  const fichaRows: [string, string | number][] = [
+  // Sem trecho real, a aba de degustação some em vez de repetir a sinopse.
+  const tabs = book.sampleChapterText ? TABS : TABS.filter((tab) => tab.id !== 'amostra');
+
+  const fichaRows: [string, string | number | undefined][] = [
     ['Título Original', book.title],
     ['Autor', book.author],
     ['Categoria', book.category],
@@ -30,12 +33,13 @@ export const BookTabs: React.FC<{ book: Book }> = ({ book }) => {
     ['Acabamento', book.format],
     ['Editora', 'Átrios Editora'],
   ];
+  const filledFichaRows = fichaRows.filter(([, value]) => value !== undefined);
 
   return (
     <div className="space-y-6">
       {/* Tabs */}
       <div className="border-b border-[#0F2C2C15] flex space-x-6" role="tablist">
-        {TABS.map((tab) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             role="tab"
@@ -64,29 +68,31 @@ export const BookTabs: React.FC<{ book: Book }> = ({ book }) => {
       >
         <p>{book.longDescription}</p>
         <p>
-          Uma publicação oficial da <strong>Átrios Editora</strong>, impressa em papel pólen de alta qualidade para leitura confortável e durabilidade geracional.
+          Uma publicação oficial da <strong>Átrios Editora</strong>.
         </p>
       </div>
 
       {/* Degustação */}
-      <div
-        role="tabpanel"
-        id="panel-amostra"
-        aria-labelledby="tab-amostra"
-        hidden={activeTab !== 'amostra'}
-        className="bg-[#F5F1EB] p-5 rounded-sm border border-[#0F2C2C15] space-y-3"
-      >
-        <h3 className="font-serif font-bold text-base text-[#0F2C2C]">
-          {book.sampleChapterTitle || 'Trecho Selecionado'}
-        </h3>
-        <p className="font-serif text-sm text-[#2D2D2D]/85 leading-relaxed italic">
-          {book.sampleChapterText || book.longDescription}
-        </p>
-        <div className="pt-2 text-xs text-[#0F2C2C]/60 flex items-center justify-between">
-          <span>Amostra cortesia da Átrios Editora</span>
-          <span className="font-bold text-[#0F2C2C]">Disponível na íntegra no livro impresso</span>
+      {book.sampleChapterText && (
+        <div
+          role="tabpanel"
+          id="panel-amostra"
+          aria-labelledby="tab-amostra"
+          hidden={activeTab !== 'amostra'}
+          className="bg-[#F5F1EB] p-5 rounded-sm border border-[#0F2C2C15] space-y-3"
+        >
+          <h3 className="font-serif font-bold text-base text-[#0F2C2C]">
+            {book.sampleChapterTitle || 'Trecho Selecionado'}
+          </h3>
+          <p className="font-serif text-sm text-[#2D2D2D]/85 leading-relaxed italic">
+            {book.sampleChapterText}
+          </p>
+          <div className="pt-2 text-xs text-[#0F2C2C]/60 flex items-center justify-between">
+            <span>Amostra cortesia da Átrios Editora</span>
+            <span className="font-bold text-[#0F2C2C]">Disponível na íntegra no livro impresso</span>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Ficha técnica */}
       <div
@@ -96,7 +102,7 @@ export const BookTabs: React.FC<{ book: Book }> = ({ book }) => {
         hidden={activeTab !== 'ficha'}
         className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs"
       >
-        {fichaRows.map(([label, value]) => (
+        {filledFichaRows.map(([label, value]) => (
           <div key={label} className="bg-[#F5F1EB] p-3 rounded-sm border border-[#0F2C2C15]">
             <span className="text-[#0F2C2C]/60 block">{label}</span>
             <span className="font-bold text-[#0F2C2C]">{value}</span>

@@ -137,8 +137,8 @@ pavimentado, mas hoje rebuild no deploy resolve.
 ## Notas de arquitetura
 
 **Capas usam `<img>`, não `next/image`.** A otimização nativa do `next/image` não roda em
-`output: 'export'` sem um loader externo, e as capas já chegam redimensionadas do Unsplash
-(`w=800&q=80`). A regra `@next/next/no-img-element` está desligada no ESLint por isso.
+`output: 'export'` sem um loader externo, e as capas já ficam salvas recortadas e
+redimensionadas em `public/assets/livros/`. A regra `@next/next/no-img-element` está desligada no ESLint por isso.
 
 **O fallback do Suspense em `/catalogo` é o catálogo inteiro.** `CatalogBrowser` usa
 `useSearchParams`, o que faz o Next renderizar apenas o fallback no HTML estático. Se o
