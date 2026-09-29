@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
       {/* Top Banner / Micro Notification */}
       <div className="bg-[#0F2C2C] text-[#FDFBF7] text-xs py-1.5 px-4 text-center font-sans tracking-wide border-b border-[#0F2C2C]/20 flex items-center justify-center gap-2">
         <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#D9D1C5] animate-pulse"></span>
-        <span>Conheça os lançamentos de 2024: <em className="italic">Mensagens que merecem ser lidas, vividas e compartilhadas.</em></span>
+        <span>Conheça os nossos lançamentos: <em className="italic">Mensagens que merecem ser lidas, vividas e compartilhadas.</em></span>
       </div>
 
       {/* Main Header */}
